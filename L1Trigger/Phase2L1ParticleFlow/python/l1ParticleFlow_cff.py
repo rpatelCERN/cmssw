@@ -271,12 +271,22 @@ l1pfCandidates = cms.EDProducer("L1TPFCandMultiMerger",
     labelsToMerge = cms.vstring("Calo", "TK", "TKVtx", "PF", "Puppi"),
 )
 
+# Excluded HF from PFCanidataes, for testing linearity w/ PU
+l1pfCandidatesNoHF = cms.EDProducer("L1TPFCandMultiMerger",
+    pfProducers = cms.VInputTag(
+        cms.InputTag("l1pfProducerBarrel"), 
+        cms.InputTag("l1pfProducerHGCal"),
+    ),
+    labelsToMerge = cms.vstring("Calo", "TK", "TKVtx", "PF", "Puppi"),
+)
+
 l1ParticleFlow_proper = cms.Sequence(
     l1ParticleFlow_calo +
     l1ParticleFlow_pf_barrel +
     l1ParticleFlow_pf_hgcal +
     l1ParticleFlow_pf_hf +
-    l1pfCandidates
+    l1pfCandidates +
+    l1pfCandidatesNoHF
 )
 
 l1ParticleFlow = cms.Sequence(l1ParticleFlow_proper)
