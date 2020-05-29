@@ -43,11 +43,12 @@ pfClustersFromCombinedCaloHF = pfClustersFromCombinedCalo.clone(
             kind    = cms.string('calo'),
     ))
 phase2_hgcalV10.toModify(pfClustersFromCombinedCaloHF,
+    hcalCandidates = cms.VInputTag(cms.InputTag("hgcalBackEndLayer2Producer","HGCalBackendLayer2Processor3DClustering")),
     hadCorrector  = "L1Trigger/Phase2L1ParticleFlow/data/hfcorr_106X.root",
     resol = cms.PSet(
-            etaBins = cms.vdouble( 3.500,  4.000,  4.500,  5.000),
-            offset  = cms.vdouble( 0.508,  0.986,  1.664,  1.379),
-            scale   = cms.vdouble( 0.758,  0.154,  0.135,  0.184),
+            etaBins = cms.vdouble( 3.100,  3.200,  3.300,  3.400,  3.500,  4.000,  4.500,  5.000),
+            offset  = cms.vdouble( 0.289, -13.239, -11.266, -0.923,  2.995,  2.321,  1.813,  2.649),
+            scale   = cms.vdouble( 0.303,  1.030,  1.350,  0.529,  0.219,  0.124,  0.146,  0.152),
             kind    = cms.string('calo'),
     )
 )
@@ -74,7 +75,8 @@ l1pfProducerBarrel = l1pfProducer.clone(
     puppiDrMin = 0.07,
     puppiPtMax = 50.,
     vtxAlgo = "external",
-    vtxCollection = cms.InputTag("VertexProducer","l1vertices"),
+    vtxFormat = cms.string("L1TkPrimaryVertex"),
+    vtxCollection = cms.InputTag("L1TkPrimaryVertex",""),
     # puppi tuning
     puAlgo = "LinearizedPuppi",
     puppiEtaCuts            = cms.vdouble( 1.6 ), # just one bin
@@ -127,7 +129,8 @@ l1pfProducerHGCal = l1pfProducer.clone(
     puppiPtMax = 50.,
     puppiUsingBareTracks = True,
     vtxAlgo = "external",
-    vtxCollection = cms.InputTag("VertexProducer","l1vertices"),
+    vtxFormat = cms.string("L1TkPrimaryVertex"),
+    vtxCollection = cms.InputTag("L1TkPrimaryVertex",""),
     # puppi tuning
     puAlgo = "LinearizedPuppi",
     puppiEtaCuts            = cms.vdouble( 2.0, 2.4, 3.1 ), # two bins in the tracker (different pT), one outside
@@ -198,7 +201,8 @@ l1pfProducerHF = l1pfProducer.clone(
     puppiDrMin = 0.1,
     puppiPtMax = 100.,
     vtxAlgo = "external",
-    vtxCollection = cms.InputTag("VertexProducer","l1vertices"),
+    vtxFormat = cms.string("L1TkPrimaryVertex"),
+    vtxCollection = cms.InputTag("L1TkPrimaryVertex",""),
     # puppi tuning
     puAlgo = "LinearizedPuppi",
     puppiEtaCuts            = cms.vdouble( 5.5 ), # one bin
