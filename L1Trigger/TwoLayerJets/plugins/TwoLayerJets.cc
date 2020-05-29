@@ -283,7 +283,7 @@ TwoLayerJets::produce(Event& iEvent, const EventSetup& iSetup)
         float trk_d0 = -trk_x0*sin(trk_phi) + trk_y0*cos(trk_phi);
 	
 	//check Trk Class
-	float trk_stubPt=StubPtConsistency::getConsistency(TTTrackHandle->at(this_l1track-1), theTrackerGeom, tTopo,mMagneticFieldStrength,4);//trkPtr->getStubPtConsistency(4)/tracknstubs;
+	float trk_stubPt=StubPtConsistency::getConsistency(TTTrackHandle->at(this_l1track-1), theTrackerGeom, tTopo,mMagneticFieldStrength,L1Tk_nPar);//trkPtr->getStubPtConsistency(4)/tracknstubs;
 	float trk_bstubPt=trkPtr->getStubPtConsistency(L1Tk_nPar)/tracknstubs;
         int nPS = 0.;     // number of stubs in PS modules
     // loop over the stubs
